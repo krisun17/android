@@ -8,13 +8,8 @@ import android.telephony.SmsMessage;
 
 public class OdbiornikSMS extends BroadcastReceiver{
 	
-	private String ostWiadomosc;
-	
-	public OdbiornikSMS()
-	{
-		super();
-		ostWiadomosc = null;
-	}
+
+	public static final String MESSAGE = null;
 
 	@Override
 	public void onReceive(Context arg0, Intent arg1) {
@@ -28,16 +23,8 @@ public class OdbiornikSMS extends BroadcastReceiver{
 			msgs[i] = SmsMessage.createFromPdu((byte[])pdus[i]);
 			wiadomosc += msgs[i].getMessageBody();
 		}
-		ostWiadomosc = wiadomosc;
-		MainActivity main = new MainActivity(ostWiadomosc);
+		Intent intent = new Intent(arg0, MainActivity.class);
+		intent.putExtra(MESSAGE, wiadomosc);
+		arg0.startActivity(intent);
 	}
-
-	public String getOstWiadomosc() {
-		return ostWiadomosc;
-	}
-
-	public void setOstWiadomosc(String ostWiadomosc) {
-		this.ostWiadomosc = ostWiadomosc;
-	}
-
 }

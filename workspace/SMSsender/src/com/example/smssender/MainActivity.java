@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.telephony.SmsManager;
 import android.view.Menu;
 import android.widget.TextView;
@@ -14,17 +15,14 @@ public class MainActivity extends Activity {
 	private String wiadomosc = null;
 	private TextView tekstWiad;
 	
-	public MainActivity(String wiadomosc)
-	{
-		super();
-		wiadomosc = wiadomosc;
-	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		tekstWiad = (TextView) findViewById(R.id.textView1);
+		Intent intent = getIntent();
+		wiadomosc = intent.getStringExtra(OdbiornikSMS.MESSAGE);
 		smsManager = SmsManager.getDefault();
 		wiadomosc = "Ta wiadomosc generowana jest automatycznie, wys³a³eœ/aœ sms o treœci: " + wiadomosc;
 		tekstWiad.setText(wiadomosc);
